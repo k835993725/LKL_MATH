@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LKL東凑西凑的小題庫</title>
+    <title>LKL東拼西凑小題庫</title>
     
     <script>
         window.MathJax = {
@@ -12,6 +12,101 @@
         };
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
+
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --success-color: #2ecc71;
+            --warning-color: #e67e22;
+            --danger-color: #e74c3c;
+            --dark-color: #2c3e50;
+            --bg-color: #f5f7fa;
+            --card-bg: #ffffff;
+            --border-color: #eef2f5;
+            --purple-color: #9b59b6;
+        }
+
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: var(--bg-color); color: var(--dark-color); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        header h1 { margin: 0 0 15px 0; font-size: 28px; }
+
+        .control-panel { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .search-panel { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .search-panel input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 300px; font-size: 14px; }
+
+        .btn { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 5px; box-sizing: border-box; }
+        .btn:hover { filter: brightness(0.9); }
+        .btn-import { background-color: #7f8c8d; color: white; }
+        .btn-export { background-color: #7f8c8d; color: white; }
+        .btn-add-cat { background-color: var(--purple-color); color: white; }
+        .btn-cloud-load { background-color: #2c3e50; color: white; border: 1px solid #fff; }
+        .btn-cloud-sync { background-color: #f39c12; color: white; }
+        
+        .btn-add-q { background-color: var(--success-color); color: white; padding: 4px 10px; font-size: 13px; border-radius: 4px; }
+        .btn-edit { background-color: var(--primary-color); color: white; padding: 5px 12px; font-size: 13px; }
+        .btn-save { background-color: var(--success-color); color: white; padding: 5px 12px; font-size: 13px; }
+        .btn-cancel { background-color: #95a5a6; color: white; padding: 5px 12px; font-size: 13px; }
+        .btn-danger { background-color: var(--danger-color); color: white; padding: 5px 12px; font-size: 13px; }
+
+        #file-input { display: none; }
+        .main-layout { display: flex; gap: 30px; align-items: flex-start; }
+
+        .sidebar-toc { width: 280px; background: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 20px; flex-shrink: 0; max-height: 85vh; overflow-y: auto; }
+        .sidebar-toc h3 { margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 18px; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list > li { margin-bottom: 12px; }
+        .toc-list a { text-decoration: none; color: var(--dark-color); font-size: 15px; font-weight: bold; display: block; padding: 5px 8px; border-radius: 4px; transition: background 0.2s; }
+        .toc-list a:hover { background-color: #e1f5fe; color: #0288d1; }
+        .toc-sub-list { list-style: none; padding-left: 15px; margin: 5px 0 0 10px; border-left: 2px dashed #e0e0e0; }
+        .toc-sub-list a { font-size: 13px; font-weight: normal; color: #555; padding: 4px 8px; }
+
+        .content-area { flex-grow: 1; min-width: 0; }
+        .category-header-container { display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary-color); padding-left: 12px; margin: 30px 0 15px 0; padding-top: 10px; }
+        .category-header-container:first-of-type { margin-top: 0; }
+        .category-title { font-size: 24px; color: var(--dark-color); margin: 0; }
+        .sub-category-title { font-size: 18px; color: #34495e; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid var(--warning-color); }
+
+        .quiz-card { background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); transition: transform 0.2s; }
+        .quiz-card.editing { border: 2px solid var(--warning-color); background-color: #fffdfb; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px; }
+        .card-title { font-weight: bold; font-size: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
+        
+        .card-tag { background-color: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+        .diff-tag { font-weight: bold; } 
+
+        .edit-layout { display: flex; gap: 20px; }
+        .edit-column { flex: 1; display: flex; flex-direction: column; }
+        .edit-row { display: flex; gap: 15px; width: 100%; } /* 新增：靈活排列行 */
+        .edit-row > div { flex: 1; }
+        
+        .edit-form label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .edit-form input[type="text"], .edit-form select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-這通常是因為我們剛剛把「難度」和「標籤」設定為**左右並排**，在電腦上看起來很省空間，但在手機狹窄的螢幕上，兩個選單擠在一起就會發生變形或歪斜。另外，上方的控制面板按鈕可能在換行時也沒有對齊得很完美。
+
+我們只需要加入一個小小的「自動換行」機制：**讓這些選單在電腦上是左右並排，在手機上則自動變成上下堆疊**。
+
+為了確保你不會貼錯位置，我已經幫你把這個修復調整好了。請直接複製下方這份**最終完美對齊版**的完整代碼，覆蓋你現在的 `index.html` 即可！
+
+*(記得在第 234 行附近，再次填寫你的 GitHub 帳號資訊)*
+
+### 📱 手機完美對齊版完整原始碼
+
+```html
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LKL東拼西凑小題庫</title>
+    
+    <script>
+        window.MathJax = {
+            tex: { inlineMath: [['\\(', '\\)']], displayMath: [['\\[', '\\]']] },
+            options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'] }
+        };
+    </script>
+    <script src="[https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js](https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js)" async></script>
 
     <style>
         :root {
@@ -74,7 +169,7 @@
         .card-title { font-weight: bold; font-size: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
         
         .card-tag { background-color: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
-        .diff-tag { font-weight: bold; } /* 難度標籤專用 */
+        .diff-tag { font-weight: bold; }
 
         .edit-layout { display: flex; gap: 20px; }
         .edit-column { flex: 1; display: flex; flex-direction: column; }
@@ -82,6 +177,10 @@
         .edit-form input[type="text"], .edit-form select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         .edit-form textarea { width: 100%; min-height: 250px; padding: 10px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical; }
         
+        /* 💡 新增：難度與標籤的排版容器 */
+        .edit-row { display: flex; gap: 10px; }
+        .edit-row > div { flex: 1; }
+
         .image-tools { margin-bottom: 15px; background: #f0f4f8; padding: 10px; border-radius: 6px; border: 1px solid #d0d7de; }
         
         .preview-box { border: 1px dashed var(--primary-color); background-color: #f8faff; padding: 15px; border-radius: 4px; min-height: 250px; overflow-x: auto; }
@@ -111,13 +210,19 @@
             .edit-form textarea { min-height: 180px; }
             .preview-box { min-height: auto; }
             
+            /* 💡 修復點 1：手機上讓難度和標籤上下堆疊，解決歪斜問題 */
+            .edit-row { flex-direction: column; gap: 0; }
+            
             .category-header-container { flex-direction: column; align-items: flex-start; gap: 10px; }
             .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            
+            /* 💡 修復點 2：強制按鈕群組在手機上填滿且對齊 */
             .card-header > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+            .card-header > div:last-child .btn { flex: 1 1 auto; justify-content: center; text-align: center; }
             
             .search-panel input { width: 100%; box-sizing: border-box; }
-            .control-panel { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; width: 100%; }
-            .btn { flex: 1 1 calc(50% - 8px); min-width: 120px; justify-content: center; font-size: 13px; padding: 8px 10px; text-align: center; box-sizing: border-box; }
+            .control-panel { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+            .control-panel .btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -125,7 +230,7 @@
 
     <div class="container">
         <header>
-            <h1>📐 嘟嘟可大冒險 <span style="font-size: 16px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">咕咕嘎嘎</span></h1>
+            <h1>📐嘟嘟可大冒險 <span style="font-size: 16px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">咕咕嘎嘎</span></h1>
             <div class="control-panel">
                 <button class="btn btn-cloud-load" onclick="loadFromGitHub()">☁️ 從雲端載入</button>
                 <button class="btn btn-cloud-sync" onclick="saveToGitHub()">🚀 一鍵同步至雲端</button>
@@ -163,38 +268,77 @@
         let hasUnsavedChanges = false;
         let mathJaxTimeout = null;
 
-        // 離開頁面警告
         window.addEventListener('beforeunload', function (e) {
             if (hasUnsavedChanges) { e.preventDefault(); e.returnValue = ''; }
         });
 
-        // ================= GitHub 雲端功能 =================
+        // ================= 智慧 GitHub 雲端功能 =================
         async function loadFromGitHub() {
             try {
                 const btn = document.querySelector('.btn-cloud-load');
                 btn.innerText = "⏳ 載入中...";
-                const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FILE_PATH}?t=${new Date().getTime()}`;
                 
-                const response = await fetch(url);
-                if (!response.ok) throw new Error("讀取失敗");
+                // 改用 GitHub API，系統會自動找尋預設分支 (免除 main/master 煩惱)
+                const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
                 
-                globalData = await response.json();
+                // 嘗試獲取瀏覽器記住的 Token
+                let token = localStorage.getItem("GITHUB_PAT") || "";
+                let headers = { "Accept": "application/vnd.github.v3.raw" };
+                if (token) headers["Authorization"] = `Bearer ${token}`;
+
+                // 第一次嘗試載入
+                let response = await fetch(apiUrl + "?t=" + new Date().getTime(), { headers });
+
+                // 如果回傳 404 或 401 且沒有 Token，代表可能是私人儲存庫，自動請求 Token
+                if ((response.status === 404 || response.status === 401) && !token) {
+                    token = prompt("🔒 系統偵測到這可能是私人題庫，或者找不到檔案。\n請輸入你的 GitHub Token：");
+                    if (!token) throw new Error("未提供 Token 或檔案不存在");
+                    
+                    localStorage.setItem("GITHUB_PAT", token);
+                    headers["Authorization"] = `Bearer ${token}`;
+                    
+                    // 帶著 Token 再嘗試一次
+                    response = await fetch(apiUrl + "?t=" + new Date().getTime(), { headers });
+                }
+
+                if (!response.ok) {
+                    if (response.status === 404) throw new Error("還是找不到檔案，請檢查 GITHUB_FILE_PATH 的檔名是否正確。");
+                    if (response.status === 401) {
+                        localStorage.removeItem("GITHUB_PAT"); // 密碼錯誤，清除紀錄
+                        throw new Error("Token 錯誤或權限不足！");
+                    }
+                    throw new Error(`伺服器回應錯誤 (代碼: ${response.status})`);
+                }
+
+                // 嘗試解析 JSON（精準攔截語法錯誤）
+                let parsedData;
+                try {
+                    parsedData = await response.json();
+                } catch (jsonErr) {
+                    throw new Error("題庫檔案的 JSON 格式錯誤！\n請檢查雲端的 update.json 是否有漏掉逗號或括號。");
+                }
+
+                globalData = parsedData;
                 document.getElementById('search-panel').style.display = 'flex';
                 document.getElementById('sidebar-toc').style.display = 'block';
                 hasUnsavedChanges = false;
                 renderPage();
+                
                 btn.innerText = "☁️ 從雲端載入";
                 alert("☁️ 成功從 GitHub 載入最新題庫！");
+
             } catch (error) {
+                console.error(error);
                 document.querySelector('.btn-cloud-load').innerText = "☁️ 從雲端載入";
-                alert(`❌ 載入失敗！請確認儲存庫是否為 Public。`);
+                alert(`❌ 載入失敗！\n原因：${error.message}`);
             }
         }
 
         async function saveToGitHub() {
             if (globalData.length === 0) return alert("題庫為空，無法同步！");
+            
             let savedToken = localStorage.getItem("GITHUB_PAT") || "";
-            let token = prompt("請輸入你的 GitHub Personal Access Token (PAT)：", savedToken);
+            let token = prompt("🚀 將同步至 GitHub\n請輸入你的 Personal Access Token：", savedToken);
             if (!token) return;
             localStorage.setItem("GITHUB_PAT", token);
 
@@ -204,7 +348,9 @@
             try {
                 const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
                 let sha = "";
-                const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${token}` } });
+                
+                // 先取得檔案現有的指紋 (SHA)
+                const getRes = await fetch(apiUrl, { headers: { "Authorization": `Bearer ${token}` } });
                 if (getRes.ok) {
                     const fileData = await getRes.json();
                     sha = fileData.sha;
@@ -215,7 +361,7 @@
 
                 const updateRes = await fetch(apiUrl, {
                     method: "PUT",
-                    headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+                    headers: { "Authorization": `Bearer ${token}`, "Content-Type": "application/json" },
                     body: JSON.stringify({
                         message: "透過題庫系統網頁自動更新",
                         content: encodedContent,
@@ -228,9 +374,14 @@
                     alert("✅ 成功同步！題庫已更新至 GitHub。");
                 } else {
                     const errData = await updateRes.json();
+                    if(errData.message.includes("Bad credentials")) {
+                        localStorage.removeItem("GITHUB_PAT");
+                        throw new Error("Token 錯誤！");
+                    }
                     throw new Error(errData.message);
                 }
             } catch (error) {
+                console.error(error);
                 alert("❌ 同步失敗：" + error.message);
             } finally {
                 btn.innerText = "🚀 一鍵同步至雲端";
@@ -276,7 +427,6 @@
 
         function addNewQuestion(catIdx) {
             const category = globalData[catIdx];
-            // 預設難度為 Lv3
             category.questions.push({ tag: "未分類", difficulty: "Lv3", content: "在此輸入題目。支援 HTML 與 MathJax \\( x^2 \\)." });
             hasUnsavedChanges = true;
             renderPage();
@@ -321,12 +471,11 @@
                         qByTag[tag].forEach(q => {
                             const origIdx = category.questions.indexOf(q);
                             
-                            // 判斷難度顏色 (舊 JSON 若無難度，預設以 Lv3 處理顯示)
                             const diff = q.difficulty || "Lv3";
-                            let diffColor = "#3498db"; // 預設藍色 Lv3
-                            if(diff === "Lv2") diffColor = "#2ecc71"; // 綠色
-                            if(diff === "Lv4") diffColor = "#9b59b6"; // 紫色
-                            if(diff === "Lv5") diffColor = "#e74c3c"; // 紅色
+                            let diffColor = "#3498db";
+                            if(diff === "Lv2") diffColor = "#2ecc71";
+                            if(diff === "Lv4") diffColor = "#9b59b6";
+                            if(diff === "Lv5") diffColor = "#e74c3c";
 
                             container.innerHTML += `
                                 <div class="quiz-card" id="card-${catIdx}-${origIdx}">
@@ -354,11 +503,10 @@
             const card = document.getElementById(`card-${catIdx}-${qIdx}`);
             const q = globalData[catIdx].questions[qIdx];
             const currentCatTitle = globalData[catIdx].categoryTitle; 
-            
-            // 讀取當前難度，若無則預設為 Lv3
             const currentDiff = q.difficulty || "Lv3";
 
             card.classList.add('editing');
+            // 💡 修復點 3：套用新的 .edit-row 樣式類別
             card.innerHTML = `
                 <div class="card-header">
                     <div class="card-title" style="color:var(--warning-color)">⚠️ 編輯中 (第 ${qIdx + 1} 題)</div>
@@ -373,8 +521,8 @@
                         <label style="color: var(--purple-color);">📁 修改主分類名稱:</label>
                         <input type="text" id="input-cat-title-${catIdx}-${qIdx}" value="${currentCatTitle}" style="border: 1px solid var(--purple-color); background: #fdfaff;">
 
-                        <div style="display: flex; gap: 10px;">
-                            <div style="flex: 1;">
+                        <div class="edit-row">
+                            <div>
                                 <label>⭐ 難度等級:</label>
                                 <select id="input-diff-${catIdx}-${qIdx}">
                                     <option value="Lv2" ${currentDiff === 'Lv2' ? 'selected' : ''}>Lv2 (基礎 / 綠)</option>
@@ -383,7 +531,7 @@
                                     <option value="Lv5" ${currentDiff === 'Lv5' ? 'selected' : ''}>Lv5 (挑戰 / 紅)</option>
                                 </select>
                             </div>
-                            <div style="flex: 1;">
+                            <div>
                                 <label>🏷️ 標籤 (Tag):</label>
                                 <input type="text" id="input-tag-${catIdx}-${qIdx}" value="${q.tag}">
                             </div>
@@ -431,7 +579,6 @@
                 globalData[catIdx].categoryTitle = newCatTitle;
             }
 
-            // 儲存難度與標籤
             globalData[catIdx].questions[qIdx].difficulty = document.getElementById(`input-diff-${catIdx}-${qIdx}`).value;
             globalData[catIdx].questions[qIdx].tag = document.getElementById(`input-tag-${catIdx}-${qIdx}`).value.trim() || "未分類";
             globalData[catIdx].questions[qIdx].content = document.getElementById(`input-content-${catIdx}-${qIdx}`).value;
