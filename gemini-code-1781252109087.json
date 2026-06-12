@@ -1,0 +1,67 @@
+[
+  {
+    "categoryTitle": "數與代數 - 指數律",
+    "questions": [
+      {
+        "num": 1,
+        "tag": "2021-P1-Q1",
+        "content": "化簡 \\( (\\alpha\\beta^{3})(\\alpha^{-2}\\beta^{4})^{5} \\)，並以正指數表示答案。<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\">\\( (\\alpha\\beta^{3})(\\alpha^{-2}\\beta^{4})^{5} \\)<br>\\( = (\\alpha\\beta^{3})(\\alpha^{-10}\\beta^{20}) \\)<br>\\( = \\alpha^{1-10}\\beta^{3+20} \\)<br>\\( = \\alpha^{-9}\\beta^{23} \\)<br>\\( = \\frac{\\beta^{23}}{\\alpha^{9}} \\)</div></details>"
+      }
+    ]
+  },
+  {
+    "categoryTitle": "數與代數 - 恆等式與公式",
+    "questions": [
+      {
+        "num": 2,
+        "tag": "2021-P1-Q2",
+        "content": "令 \\( a \\) 成為公式 \\( \\frac{4-3a}{b}=5 \\) 的主項。<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\">\\( \\frac{4-3a}{b}=5 \\)<br>\\( 4-3a = 5b \\)<br>\\( -3a = 5b - 4 \\)<br>\\( a = \\frac{4-5b}{3} \\) （或寫作 \\( a = \\frac{4}{3} - \\frac{5b}{3} \\)）</div></details>"
+      }
+    ]
+  },
+  {
+    "categoryTitle": "數與代數 - 因式分解",
+    "questions": [
+      {
+        "num": 3,
+        "tag": "2021-P1-Q3",
+        "content": "因式分解：<br>(a) \\( 6x^{2}+xy-2y^{2} \\)<br>(b) \\( 8x-4y-6x^{2}-xy+2y^{2} \\)<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\"><strong>(a)</strong><br>\\( 6x^{2}+xy-2y^{2} = (2x-y)(3x+2y) \\)<br><br><strong>(b)</strong><br>\\( 8x-4y-6x^{2}-xy+2y^{2} \\)<br>\\( = 4(2x-y) - (6x^{2}+xy-2y^{2}) \\)<br>\\( = 4(2x-y) - (2x-y)(3x+2y) \\)<br>\\( = (2x-y)[4 - (3x+2y)] \\)<br>\\( = (2x-y)(4 - 3x - 2y) \\)</div></details>"
+      }
+    ]
+  },
+  {
+    "categoryTitle": "數與代數 - 不等式",
+    "questions": [
+      {
+        "num": 4,
+        "tag": "2021-P1-Q4",
+        "content": "(a) 求同時滿足 \\( \\frac{7(x-2)}{5}+11>3(x-1) \\) 及 \\( x+4 \\ge 0 \\) 的 \\( x \\) 值的範圍。<br>(b) 有多少個正整數同時滿足 (a) 的不等式？<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\"><strong>(a)</strong><br>\\( \\frac{7(x-2)}{5}+11>3(x-1) \\)<br>\\( 7(x-2) + 55 > 15(x-1) \\)<br>\\( 7x - 14 + 55 > 15x - 15 \\)<br>\\( 7x + 41 > 15x - 15 \\)<br>\\( -8x > -56 \\)<br>\\( x < 7 \\)<br><br>同時處理第二個條件：\\( x + 4 \\ge 0 \\Rightarrow x \\ge -4 \\)<br>因此，所求的範圍為 \\( -4 \\le x < 7 \\)。<br><br><strong>(b)</strong><br>滿足條件的正整數有 1, 2, 3, 4, 5, 6，共 6 個。</div></details>"
+      }
+    ]
+  },
+  {
+    "categoryTitle": "數與代數 - 方程應用題與百分數",
+    "questions": [
+      {
+        "num": 5,
+        "tag": "2021-P1-Q5",
+        "content": "某男生擁有貼紙的數目為某女生擁有的 3 倍。若該男生將他其中的 20 張貼紙送給該女生，則該女生擁有貼紙的數目為該男生擁有的 2 倍。求該男生和該女生擁有貼紙的總數。<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\">設女生擁有貼紙的數目為 \\( x \\) ，則男生擁有貼紙的數目為 \\( 3x \\)。<br>根據題意：<br>\\( 2(3x - 20) = x + 20 \\)<br>\\( 6x - 40 = x + 20 \\)<br>\\( 5x = 60 \\)<br>\\( x = 12 \\)<br><br>男生擁有的數目 = \\( 3(12) = 36 \\)。<br>總數 = \\( 12 + 36 = 48 \\)。<br>因此，該男生和該女生擁有貼紙的總數為 48。</div></details>"
+      },
+      {
+        "num": 6,
+        "tag": "2021-P1-Q6",
+        "content": "某襯衣的標價較其成本高 $80。該襯衣以其標價九折售出。售出該襯衣後，盈利百分率為 30%。求該襯衣的標價。<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\">設該襯衣的成本為 \\( x \\) 元。<br>標價 = \\( x + 80 \\) 元。<br>售價 = \\( 0.9(x + 80) \\) 元。<br><br>根據題意（售價 = 成本 \\( \\times (1 + 30\\%) \\)）：<br>\\( 0.9(x + 80) = x(1.3) \\)<br>\\( 0.9x + 72 = 1.3x \\)<br>\\( 0.4x = 72 \\)<br>\\( x = 180 \\)<br><br>標價 = \\( 180 + 80 = 260 \\)。<br>因此，該襯衣的標價為 $260。</div></details>"
+      }
+    ]
+  },
+  {
+    "categoryTitle": "圖形與空間 - 極坐標系",
+    "questions": [
+      {
+        "num": 7,
+        "tag": "2021-P1-Q7",
+        "content": "在某極坐標系中，\\( O \\) 為極點。點 \\( P \\) 及點 \\( Q \\) 的極坐標分別為 \\( (r, 80^\\circ) \\) 及 \\( (r, 140^\\circ) \\) ，其中 \\( r \\) 為一正常數。已知 \\( P \\) 與 \\( Q \\) 間的距離為 21。<br>(a) 求 \\( \\angle POQ \\)。<br>(b) 求 \\( r \\)。<br>(c) 求 \\( \\triangle OPQ \\) 的周界。<br><br><details><summary><strong style=\"cursor:pointer; color:#3498db;\">👉 點擊查看解答</strong></summary><div style=\"padding:15px; background-color:#f8faff; border-left:4px solid #2ecc71; margin-top:10px; border-radius:4px;\"><strong>(a)</strong><br>\\( \\angle POQ = 140^\\circ - 80^\\circ = 60^\\circ \\)<br><br><strong>(b)</strong><br>因為 \\( OP = OQ = r \\) ，所以 \\( \\triangle OPQ \\) 是一個等腰三角形。<br>又因為頂角 \\( \\angle POQ = 60^\\circ \\) ，所以 \\( \\triangle OPQ \\) 是一個等邊三角形。<br>因此，\\( r = PQ = 21 \\)。<br><br><strong>(c)</strong><br>\\( \\triangle OPQ \\) 的周界 = \\( 3 \\times 21 = 63 \\)。</div></details>"
+      }
+    ]
+  }
+]
