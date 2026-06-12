@@ -2,7 +2,7 @@
 <html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>嘟嘟可大冒險</title>
     
     <script>
@@ -14,6 +14,9 @@
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 
     <style>
+        /* ================= 核心重置 ================= */
+        *, *::before, *::after { box-sizing: border-box; } /* 解決所有撐破螢幕的問題 */
+        
         :root {
             --primary-color: #3498db;
             --success-color: #2ecc71;
@@ -26,34 +29,46 @@
             --purple-color: #9b59b6;
         }
 
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: var(--bg-color); color: var(--dark-color); line-height: 1.6; margin: 0; padding: 20px; }
-        .container { max-width: 1300px; margin: 0 auto; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; 
+            background-color: var(--bg-color); 
+            color: var(--dark-color); 
+            line-height: 1.6; 
+            margin: 0; 
+            padding: 20px; 
+            overflow-x: hidden; /* 防止整個網頁左右滑動 */
+            width: 100%;
+        }
         
-        header { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .container { max-width: 1300px; margin: 0 auto; width: 100%; }
+        
+        /* ================= 頂部設計 ================= */
+        header { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; }
         header h1 { margin: 0 0 15px 0; font-size: 28px; }
 
         .control-panel { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
-        .search-panel { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
-        .search-panel input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 300px; font-size: 14px; box-sizing: border-box; }
+        .search-panel { display: flex; justify-content: center; margin-top: 15px; width: 100%; }
+        .search-panel input { padding: 12px; border-radius: 6px; border: 1px solid #ccc; width: 100%; max-width: 400px; font-size: 15px; }
 
-        .btn { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 5px; box-sizing: border-box; }
+        .btn { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 5px; }
         .btn:hover { filter: brightness(0.9); }
-        .btn-import { background-color: #7f8c8d; color: white; }
-        .btn-export { background-color: #7f8c8d; color: white; }
+        .btn-import, .btn-export { background-color: #7f8c8d; color: white; }
         .btn-add-cat { background-color: var(--purple-color); color: white; }
         .btn-cloud-load { background-color: #2c3e50; color: white; border: 1px solid #fff; }
         .btn-cloud-sync { background-color: #f39c12; color: white; }
         
-        .btn-add-q { background-color: var(--success-color); color: white; padding: 4px 10px; font-size: 13px; border-radius: 4px; }
-        .btn-edit { background-color: var(--primary-color); color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-save { background-color: var(--success-color); color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-cancel { background-color: #95a5a6; color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-danger { background-color: var(--danger-color); color: white; padding: 5px 12px; font-size: 13px; }
+        .btn-add-q { background-color: var(--success-color); color: white; padding: 6px 12px; font-size: 13px; border-radius: 4px; }
+        .btn-edit { background-color: var(--primary-color); color: white; padding: 6px 12px; font-size: 13px; }
+        .btn-save { background-color: var(--success-color); color: white; padding: 6px 12px; font-size: 13px; }
+        .btn-cancel { background-color: #95a5a6; color: white; padding: 6px 12px; font-size: 13px; }
+        .btn-danger { background-color: var(--danger-color); color: white; padding: 6px 12px; font-size: 13px; }
 
         #file-input { display: none; }
-        .main-layout { display: flex; gap: 30px; align-items: flex-start; }
+        
+        /* ================= 版面佈局 ================= */
+        .main-layout { display: flex; gap: 30px; align-items: flex-start; width: 100%; }
 
-        .sidebar-toc { width: 280px; background: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 20px; flex-shrink: 0; max-height: 85vh; overflow-y: auto; box-sizing: border-box; }
+        .sidebar-toc { width: 280px; background: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 20px; flex-shrink: 0; max-height: 85vh; overflow-y: auto; }
         .sidebar-toc h3 { margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 18px; }
         .toc-list { list-style: none; padding: 0; margin: 0; }
         .toc-list > li { margin-bottom: 12px; }
@@ -62,72 +77,79 @@
         .toc-sub-list { list-style: none; padding-left: 15px; margin: 5px 0 0 10px; border-left: 2px dashed #e0e0e0; }
         .toc-sub-list a { font-size: 13px; font-weight: normal; color: #555; padding: 4px 8px; }
 
-        .content-area { flex-grow: 1; min-width: 0; }
+        .content-area { flex-grow: 1; min-width: 0; width: 100%; }
+        
         .category-header-container { display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary-color); padding-left: 12px; margin: 30px 0 15px 0; padding-top: 10px; }
         .category-header-container:first-of-type { margin-top: 0; }
         .category-title { font-size: 24px; color: var(--dark-color); margin: 0; }
         .sub-category-title { font-size: 18px; color: #34495e; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid var(--warning-color); }
 
-        .quiz-card { background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); transition: transform 0.2s; box-sizing: border-box; }
+        /* ================= 卡片與編輯區 ================= */
+        .quiz-card { background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); transition: transform 0.2s; width: 100%; }
         .quiz-card.editing { border: 2px solid var(--warning-color); background-color: #fffdfb; }
-        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px; }
-        .card-title { font-weight: bold; font-size: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 5px; }
         
-        .card-tag { background-color: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 4px; font-size: 12px; }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 12px; margin-bottom: 15px; gap: 10px; }
+        .card-title { font-weight: bold; font-size: 16px; display: flex; align-items: center; flex-wrap: wrap; gap: 6px; }
+        .card-actions { display: flex; gap: 8px; flex-wrap: wrap; } /* 嚴格包裝按鈕 */
+        
+        .card-body { overflow-x: auto; padding-bottom: 5px; } /* 防止過長數學公式撐破螢幕 */
+        
+        .card-tag { background-color: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; }
         .diff-tag { font-weight: bold; }
 
-        .edit-layout { display: flex; gap: 20px; }
-        .edit-column { flex: 1; display: flex; flex-direction: column; min-width: 0; }
-        .edit-form label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #555; }
-        
-        /* 這裡之前斷掉了，已修復 */
-        .edit-form input[type="text"], .edit-form select { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .edit-form textarea { width: 100%; min-height: 250px; padding: 10px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical; }
-        
-        .edit-row { display: flex; gap: 10px; }
+        .edit-layout { display: flex; gap: 20px; width: 100%; }
+        .edit-column { flex: 1; display: flex; flex-direction: column; min-width: 0; width: 100%; }
+        .edit-row { display: flex; gap: 15px; width: 100%; }
         .edit-row > div { flex: 1; min-width: 0; }
 
+        .edit-form label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #555; }
+        .edit-form input[type="text"], .edit-form select { width: 100%; padding: 10px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; }
+        .edit-form textarea { width: 100%; min-height: 250px; padding: 10px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; resize: vertical; }
+        
         .image-tools { margin-bottom: 15px; background: #f0f4f8; padding: 10px; border-radius: 6px; border: 1px solid #d0d7de; }
         
-        .preview-box { border: 1px dashed var(--primary-color); background-color: #f8faff; padding: 15px; border-radius: 4px; min-height: 250px; overflow-x: auto; box-sizing: border-box; }
+        .preview-box { border: 1px dashed var(--primary-color); background-color: #f8faff; padding: 15px; border-radius: 4px; min-height: 250px; overflow-x: auto; width: 100%; }
         .preview-box img, .card-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
         .placeholder-text { text-align: center; color: #95a5a6; padding: 40px 0; font-size: 16px; }
 
         /* =========================================
-           📱 手機端響應式適配 (Responsive Design)
+           📱 終極手機端響應式適配 (Bulletproof Mobile)
            ========================================= */
         @media (max-width: 768px) {
             body { padding: 10px; }
-            header { padding: 20px 10px; }
-            header h1 { font-size: 22px; }
+            header { padding: 15px 10px; }
+            header h1 { font-size: 20px; }
             
             .main-layout { flex-direction: column; gap: 15px; }
             
             .sidebar-toc { 
                 width: 100%; 
                 position: static; 
-                max-height: 200px; 
+                max-height: 220px; 
                 margin-bottom: 10px;
                 border: 2px solid var(--primary-color);
             }
 
             .edit-layout { flex-direction: column; gap: 15px; }
-            .edit-form textarea { min-height: 180px; }
+            .edit-form textarea { min-height: 200px; }
             .preview-box { min-height: auto; }
             
-            /* 手機上讓難度和標籤上下堆疊 */
+            /* 強制選單垂直排列，解決歪斜 */
             .edit-row { flex-direction: column; gap: 0; }
             
+            /* 標題與按鈕容器自動適應 */
             .category-header-container { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .card-header { flex-direction: column; align-items: flex-start; gap: 12px; }
             
-            /* 按鈕群組在手機上自動對齊填滿 */
-            .card-header > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
-            .card-header > div:last-child .btn { flex: 1 1 auto; margin: 0; }
+            /* 按鈕群組強制 100% 寬度且平分空間 */
+            .card-actions { width: 100%; }
+            .card-actions .btn { flex: 1; margin: 0; font-size: 13px; }
             
-            .search-panel input { width: 100%; }
-            .control-panel { display: flex; flex-direction: column; gap: 8px; width: 100%; box-sizing: border-box; }
-            .control-panel .btn { width: 100%; margin: 0; }
+            /* 頂部控制面板垂直整齊排列 */
+            .control-panel { flex-direction: column; width: 100%; gap: 8px; }
+            .control-panel .btn { width: 100%; font-size: 14px; padding: 12px; }
+            
+            .quiz-card { padding: 15px; } /* 手機上縮小卡片內距留出空間 */
         }
     </style>
 </head>
@@ -135,7 +157,7 @@
 
     <div class="container">
         <header>
-            <h1>📐 嘟嘟可大冒險 <span style="font-size: 16px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">咕咕嘎嘎</span></h1>
+            <h1>📐嘟嘟可大冒險<span style="font-size: 14px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">咕咕嘎嘎</span></h1>
             <div class="control-panel">
                 <button class="btn btn-cloud-load" onclick="loadFromGitHub()">☁️ 從雲端載入</button>
                 <button class="btn btn-cloud-sync" onclick="saveToGitHub()">🚀 一鍵同步至雲端</button>
@@ -379,7 +401,9 @@
                                             <span class="card-tag diff-tag" style="background-color: ${diffColor}; color: white;">⭐ ${diff}</span>
                                             <span class="card-tag">${q.tag}</span>
                                         </div>
-                                        <button class="btn btn-edit" onclick="enterEditMode(${catIdx}, ${origIdx})">✏️ 編輯</button>
+                                        <div class="card-actions">
+                                            <button class="btn btn-edit" onclick="enterEditMode(${catIdx}, ${origIdx})">✏️ 編輯</button>
+                                        </div>
                                     </div>
                                     <div class="card-body">${q.content}</div>
                                 </div>`;
@@ -403,9 +427,9 @@
             card.innerHTML = `
                 <div class="card-header">
                     <div class="card-title" style="color:var(--warning-color)">⚠️ 編輯中 (第 ${qIdx + 1} 題)</div>
-                    <div>
-                        <button class="btn btn-save" onclick="saveQuestion(${catIdx}, ${qIdx})">💾 儲存變更</button>
-                        <button class="btn btn-danger" onclick="deleteQuestion(${catIdx}, ${qIdx})">🗑️ 刪除題目</button>
+                    <div class="card-actions">
+                        <button class="btn btn-save" onclick="saveQuestion(${catIdx}, ${qIdx})">💾 儲存</button>
+                        <button class="btn btn-danger" onclick="deleteQuestion(${catIdx}, ${qIdx})">🗑️ 刪除</button>
                         <button class="btn btn-cancel" onclick="renderPage()">❌ 取消</button>
                     </div>
                 </div>
@@ -451,7 +475,7 @@
             const reader = new FileReader();
             reader.onload = function(e) {
                 const textarea = document.getElementById(`input-content-${catIdx}-${qIdx}`);
-                const imgTag = `\\n<img src="${e.target.result}" alt="圖片" />\\n`;
+                const imgTag = `\\n<img src="${e.target.result}" alt="圖片" style="max-width:100%; height:auto;" />\\n`;
                 const s = textarea.selectionStart, end = textarea.selectionEnd;
                 textarea.value = textarea.value.substring(0, s) + imgTag + textarea.value.substring(end);
                 updateLivePreview(catIdx, qIdx);
