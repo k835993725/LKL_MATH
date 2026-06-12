@@ -13,43 +13,6 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async></script>
 
-    /* =========================================
-           📱 手機端響應式適配 (Responsive Design)
-           ========================================= */
-        @media (max-width: 768px) {
-            body { padding: 10px; }
-            header { padding: 20px 10px; }
-            header h1 { font-size: 22px; }
-            
-            /* 將左右排版改為上下排版 */
-            .main-layout { flex-direction: column; gap: 15px; }
-            
-            /* 左側目錄改為置頂，並限制高度支援內部滑動 */
-            .sidebar-toc { 
-                width: 100%; 
-                position: static; 
-                max-height: 250px; 
-                box-sizing: border-box; 
-                margin-bottom: 10px;
-                border: 2px solid var(--primary-color);
-            }
-
-            /* 編輯模式：將「編輯表單」與「即時預覽」由左右改為上下堆疊 */
-            .edit-layout { flex-direction: column; gap: 15px; }
-            .edit-form textarea { min-height: 180px; }
-            .preview-box { min-height: auto; }
-            
-            /* 標題與按鈕的排版優化：避免按鈕超出螢幕 */
-            .category-header-container { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .card-header > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
-            
-            /* 搜尋框與控制面板滿版適配 */
-            .search-panel input { width: 100%; box-sizing: border-box; }
-            .control-panel { flex-direction: row; gap: 8px; }
-            .btn { flex: 1 1 auto; justify-content: center; font-size: 13px; padding: 8px 10px; text-align: center; }
-        }
-    
     <style>
         :root {
             --primary-color: #3498db;
@@ -122,6 +85,42 @@
         .preview-box { border: 1px dashed var(--primary-color); background-color: #f8faff; padding: 15px; border-radius: 4px; min-height: 250px; overflow-x: auto; }
         .preview-box img, .card-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
         .placeholder-text { text-align: center; color: #95a5a6; padding: 40px 0; font-size: 16px; }
+        /* =========================================
+           📱 手機端響應式適配 (Responsive Design)
+           ========================================= */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            header { padding: 20px 10px; }
+            header h1 { font-size: 22px; }
+            
+            /* 將左右排版改為上下排版 */
+            .main-layout { flex-direction: column; gap: 15px; }
+            
+            /* 左側目錄改為置頂，並限制高度支援內部滑動 */
+            .sidebar-toc { 
+                width: 100%; 
+                position: static; 
+                max-height: 250px; 
+                box-sizing: border-box; 
+                margin-bottom: 10px;
+                border: 2px solid var(--primary-color);
+            }
+
+            /* 編輯模式：將「編輯表單」與「即時預覽」由左右改為上下堆疊 */
+            .edit-layout { flex-direction: column; gap: 15px; }
+            .edit-form textarea { min-height: 180px; }
+            .preview-box { min-height: auto; }
+            
+            /* 標題與按鈕的排版優化：避免按鈕超出螢幕 */
+            .category-header-container { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .card-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .card-header > div:last-child { display: flex; flex-wrap: wrap; gap: 8px; width: 100%; }
+            
+            /* 搜尋框與控制面板滿版適配 */
+            .search-panel input { width: 100%; box-sizing: border-box; }
+            .control-panel { flex-direction: row; gap: 8px; }
+            .btn { flex: 1 1 auto; justify-content: center; font-size: 13px; padding: 8px 10px; text-align: center; }
+        }
     </style>
 </head>
 <body>
