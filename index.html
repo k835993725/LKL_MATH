@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DSE 數學智能題庫管理系統 - 專業全功能版 v2.0</title>
+    <title>LKL數學題庫</title>
     
     <script>
         window.MathJax = {
@@ -26,246 +26,84 @@
             --purple-color: #9b59b6;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--dark-color);
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-        }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #2c3e50, #3498db);
-            color: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif; background-color: var(--bg-color); color: var(--dark-color); line-height: 1.6; margin: 0; padding: 20px; }
+        .container { max-width: 1300px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
         header h1 { margin: 0 0 15px 0; font-size: 28px; }
 
-        .control-panel {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            justify-content: center;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-        }
+        .control-panel { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; align-items: center; background: rgba(255, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
+        .search-panel { display: flex; justify-content: center; gap: 10px; margin-top: 15px; }
+        .search-panel input { padding: 10px; border-radius: 6px; border: 1px solid #ccc; width: 300px; font-size: 14px; }
 
-        .search-panel {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .search-panel input {
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            width: 300px;
-            font-size: 14px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 14px;
-            transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-
-        .btn-import { background-color: var(--primary-color); color: white; }
-        .btn-import:hover { background-color: #2980b9; }
-        .btn-export { background-color: var(--warning-color); color: white; }
-        .btn-export:hover { background-color: #d35400; }
+        .btn { padding: 10px 16px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; font-size: 14px; transition: all 0.2s ease; display: inline-flex; align-items: center; gap: 5px; }
+        .btn:hover { filter: brightness(0.9); }
+        .btn-import { background-color: #7f8c8d; color: white; }
+        .btn-export { background-color: #7f8c8d; color: white; }
         .btn-add-cat { background-color: var(--purple-color); color: white; }
-        .btn-add-cat:hover { background-color: #8e44ad; }
+        .btn-cloud-load { background-color: #2c3e50; color: white; border: 1px solid #fff; }
+        .btn-cloud-sync { background-color: #f39c12; color: white; }
         
         .btn-add-q { background-color: var(--success-color); color: white; padding: 4px 10px; font-size: 13px; border-radius: 4px; }
-        .btn-add-q:hover { background-color: #27ae60; }
         .btn-edit { background-color: var(--primary-color); color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-edit:hover { background-color: #2980b9; }
         .btn-save { background-color: var(--success-color); color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-save:hover { background-color: #27ae60; }
         .btn-cancel { background-color: #95a5a6; color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-cancel:hover { background-color: #7f8c8d; }
         .btn-danger { background-color: var(--danger-color); color: white; padding: 5px 12px; font-size: 13px; }
-        .btn-danger:hover { background-color: #c0392b; }
 
         #file-input { display: none; }
+        .main-layout { display: flex; gap: 30px; align-items: flex-start; }
 
-        .main-layout {
-            display: flex;
-            gap: 30px;
-            align-items: flex-start;
-        }
-
-        /* ----- 目錄區塊 ----- */
-        .sidebar-toc {
-            width: 280px;
-            background: var(--card-bg);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 20px;
-            flex-shrink: 0;
-            max-height: 85vh;
-            overflow-y: auto;
-        }
-
+        .sidebar-toc { width: 280px; background: var(--card-bg); padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); position: sticky; top: 20px; flex-shrink: 0; max-height: 85vh; overflow-y: auto; }
         .sidebar-toc h3 { margin-top: 0; border-bottom: 2px solid var(--border-color); padding-bottom: 10px; font-size: 18px; }
-        
         .toc-list { list-style: none; padding: 0; margin: 0; }
         .toc-list > li { margin-bottom: 12px; }
-        
-        .toc-list a {
-            text-decoration: none;
-            color: var(--dark-color);
-            font-size: 15px;
-            font-weight: bold;
-            display: block;
-            padding: 5px 8px;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
+        .toc-list a { text-decoration: none; color: var(--dark-color); font-size: 15px; font-weight: bold; display: block; padding: 5px 8px; border-radius: 4px; transition: background 0.2s; }
         .toc-list a:hover { background-color: #e1f5fe; color: #0288d1; }
+        .toc-sub-list { list-style: none; padding-left: 15px; margin: 5px 0 0 10px; border-left: 2px dashed #e0e0e0; }
+        .toc-sub-list a { font-size: 13px; font-weight: normal; color: #555; padding: 4px 8px; }
 
-        .toc-sub-list {
-            list-style: none;
-            padding-left: 15px;
-            margin: 5px 0 0 10px;
-            border-left: 2px dashed #e0e0e0;
-        }
-        .toc-sub-list li { margin-bottom: 4px; }
-        .toc-sub-list a {
-            font-size: 13px;
-            font-weight: normal;
-            color: #555;
-            padding: 4px 8px;
-        }
-        .toc-sub-list a:hover { background-color: #fff3e0; color: #e67e22; }
-
-        /* ----- 主內容區塊 ----- */
         .content-area { flex-grow: 1; min-width: 0; }
-
-        .category-header-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-left: 6px solid var(--primary-color);
-            padding-left: 12px;
-            margin: 30px 0 15px 0;
-            padding-top: 10px;
-        }
+        .category-header-container { display: flex; justify-content: space-between; align-items: center; border-left: 6px solid var(--primary-color); padding-left: 12px; margin: 30px 0 15px 0; padding-top: 10px; }
         .category-header-container:first-of-type { margin-top: 0; }
+        .category-title { font-size: 24px; color: var(--dark-color); margin: 0; }
+        .sub-category-title { font-size: 18px; color: #34495e; margin: 25px 0 15px 0; padding-left: 10px; border-left: 4px solid var(--warning-color); }
 
-        .category-title {
-            font-size: 24px;
-            color: var(--dark-color);
-            margin: 0;
-        }
-
-        .sub-category-title {
-            font-size: 18px;
-            color: #34495e;
-            margin: 25px 0 15px 0;
-            padding-left: 10px;
-            border-left: 4px solid var(--warning-color);
-        }
-
-        .quiz-card {
-            background-color: var(--card-bg);
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            padding: 20px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-        .quiz-card:hover { transform: translateY(-2px); box-shadow: 0 6px 12px rgba(0,0,0,0.08); }
+        .quiz-card { background-color: var(--card-bg); border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border: 1px solid var(--border-color); transition: transform 0.2s; }
         .quiz-card.editing { border: 2px solid var(--warning-color); background-color: #fffdfb; }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
+        .card-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0; padding-bottom: 10px; margin-bottom: 15px; }
         .card-title { font-weight: bold; font-size: 16px; }
-        .card-actions { display: flex; gap: 8px; }
+        .card-tag { background-color: #e1f5fe; color: #0288d1; padding: 3px 8px; border-radius: 4px; font-size: 12px; margin-left: 10px; }
 
         .edit-layout { display: flex; gap: 20px; }
         .edit-column { flex: 1; display: flex; flex-direction: column; }
         .edit-form label { display: block; font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #555; }
         .edit-form input[type="text"] { width: 100%; padding: 8px; margin-bottom: 15px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .edit-form textarea { width: 100%; min-height: 250px; padding: 10px; font-family: "Courier New", Courier, monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical; }
+        .edit-form textarea { width: 100%; min-height: 250px; padding: 10px; font-family: monospace; font-size: 14px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; resize: vertical; }
         
-        .image-tools {
-            margin-bottom: 15px;
-            background: #f0f4f8;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #d0d7de;
-        }
-        .image-tools label { margin-bottom: 2px; }
-        .image-tools input[type="file"] { font-size: 12px; }
-
+        .image-tools { margin-bottom: 15px; background: #f0f4f8; padding: 10px; border-radius: 6px; border: 1px solid #d0d7de; }
+        
         .preview-box { border: 1px dashed var(--primary-color); background-color: #f8faff; padding: 15px; border-radius: 4px; min-height: 250px; overflow-x: auto; }
-        .preview-box img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
-        .card-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
-        
-        .placeholder-text { text-align: center; color: #95a5a6; padding: 4px 0; font-size: 16px; }
-        .cache-banner {
-            background-color: #e8f8f5;
-            border: 1px solid #a3e4d7;
-            color: #117864;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .preview-box img, .card-body img { max-width: 100%; height: auto; display: block; margin: 10px 0; }
+        .placeholder-text { text-align: center; color: #95a5a6; padding: 40px 0; font-size: 16px; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <header>
-            <h1>📐 DSE 數學智能題庫管理系統 <span style="font-size: 16px; vertical-align: middle; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">v2.0 專業加強版</span></h1>
+            <h1>📐 可莉天下第一可愛 <span style="font-size: 16px; background: rgba(0,0,0,0.2); padding: 4px 8px; border-radius: 20px;">咕咕嘎嘎</span></h1>
             <div class="control-panel">
-                <button class="btn btn-import" onclick="document.getElementById('file-input').click()">📥 匯入題庫 JSON</button>
-                <input type="file" id="file-input" accept=".json" onchange="handleFileLoad(event)">
+                <button class="btn btn-cloud-load" onclick="loadFromGitHub()">☁️ 從雲端載入</button>
+                <button class="btn btn-cloud-sync" onclick="saveToGitHub()">🚀 一鍵同步至雲端</button>
                 <button class="btn btn-add-cat" onclick="addNewCategory()">➕ 新增主分類</button>
-                <button class="btn btn-export" onclick="exportJSON()">💾 匯出更新檔 JSON</button>
+                <button class="btn btn-import" onclick="document.getElementById('file-input').click()">📥 本機匯入</button>
+                <input type="file" id="file-input" accept=".json" onchange="handleFileLoad(event)">
+                <button class="btn btn-export" onclick="exportJSON()">💾 本機匯出</button>
             </div>
             <div class="search-panel" id="search-panel" style="display: none;">
                 <input type="text" id="search-input" placeholder="🔍 搜尋題目內容或 Tag..." onkeyup="filterQuestions()">
             </div>
         </header>
-
-        <div id="cache-notice-container"></div>
 
         <div class="main-layout">
             <aside class="sidebar-toc" id="sidebar-toc" style="display: none;">
@@ -274,369 +112,253 @@
             </aside>
 
             <main class="content-area" id="quiz-container">
-                <div style="text-align: center; padding: 40px 20px; background: white; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                    <p style="font-size: 18px; color: #7f8c8d; margin-bottom: 20px;">💡 歡迎使用題庫系統！請選擇操作方式以開始：</p>
-                    <div style="display: flex; gap: 15px; justify-content: center;">
-                        <button class="btn btn-import" onclick="document.getElementById('file-input').click()">讀取現有 JSON 檔案</button>
-                        <button class="btn btn-add-cat" onclick="addNewCategory(); if(globalData.length>0){document.getElementById('search-panel').style.display='flex'; document.getElementById('sidebar-toc').style.display='block';}">從零開始建立全新題庫</button>
-                    </div>
-                </div>
+                <div class="placeholder-text">💡 歡迎使用！請點擊上方「☁️ 從雲端載入」開始管理題庫。</div>
             </main>
         </div>
     </div>
 
     <script>
+        // ==========================================
+        // 🚨 請在此修改為你的 GitHub 資訊 🚨
+        // ==========================================
+        const GITHUB_OWNER = "你的GitHub帳號名稱";      // 例如: john-doe
+        const GITHUB_REPO = "你的Repository名稱";        // 例如: dse-math-bank
+        const GITHUB_FILE_PATH = "dse_2021_p1.json"; // 你存放題庫的檔案名稱
+
         let globalData = [];
         let hasUnsavedChanges = false;
         let mathJaxTimeout = null;
-        const CACHE_KEY = "DSE_Math_Bank_Local_Cache";
 
-        // 頁面載入時檢查 LocalStorage 緩存
-        window.onload = function() {
-            const cachedData = localStorage.getItem(CACHE_KEY);
-            if (cachedData) {
-                try {
-                    const parsed = JSON.parse(cachedData);
-                    if (parsed && parsed.length > 0) {
-                        showCacheBanner(parsed);
-                    }
-                } catch(e) {
-                    console.error("讀取本地暫存快取失敗", e);
-                }
-            }
-        };
-
+        // 離開頁面警告
         window.addEventListener('beforeunload', function (e) {
-            if (hasUnsavedChanges) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
+            if (hasUnsavedChanges) { e.preventDefault(); e.returnValue = ''; }
         });
 
-        // 顯示暫存提醒橫幅
-        function showCacheBanner(parsedData) {
-            const container = document.getElementById('cache-notice-container');
-            container.innerHTML = `
-                <div class="cache-banner" id="cache-banner">
-                    <div><strong>ℹ️ 系統偵測到未匯出的編輯進度：</strong> 包含 ${parsedData.length} 個分類。是否還原上次的編輯狀態？</div>
-                    <div style="display:flex; gap: 10px;">
-                        <button class="btn btn-save" style="padding: 4px 10px; font-size:12px;" onclick="loadFromCache()">還原進度</button>
-                        <button class="btn btn-danger" style="padding: 4px 10px; font-size:12px;" onclick="clearCacheBanner()">放棄並刪除</button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function loadFromCache() {
-            globalData = JSON.parse(localStorage.getItem(CACHE_KEY));
-            document.getElementById('search-panel').style.display = 'flex';
-            document.getElementById('sidebar-toc').style.display = 'block';
-            hasUnsavedChanges = true;
-            clearCacheBanner();
-            renderPage();
-        }
-
-        function clearCacheBanner() {
-            localStorage.removeItem(CACHE_KEY);
-            const banner = document.getElementById('cache-banner');
-            if (banner) banner.remove();
-        }
-
-        function saveToCache() {
-            localStorage.setItem(CACHE_KEY, JSON.stringify(globalData));
-        }
-
-        // 結構驗證函數 (Schema Validation)
-        function validateJSONStructure(data) {
-            if (!Array.isArray(data)) return false;
-            for (let i = 0; i < data.length; i++) {
-                const item = data[i];
-                if (typeof item !== 'object' || item === null) return false;
-                if (!('categoryTitle' in item) || !('questions' in item)) return false;
-                if (!Array.isArray(item.questions)) return false;
+        // ================= GitHub 雲端功能 =================
+        
+        // ☁️ 從 GitHub 直接讀取
+        async function loadFromGitHub() {
+            try {
+                const btn = document.querySelector('.btn-cloud-load');
+                btn.innerText = "⏳ 載入中...";
+                const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_FILE_PATH}?t=${new Date().getTime()}`;
                 
-                for (let j = 0; j < item.questions.length; j++) {
-                    const q = item.questions[j];
-                    if (typeof q !== 'object' || q === null) return false;
-                    if (!('num' in q) || !('content' in q) || !('tag' in q)) return false;
-                }
+                const response = await fetch(url);
+                if (!response.ok) throw new Error("讀取失敗");
+                
+                globalData = await response.json();
+                document.getElementById('search-panel').style.display = 'flex';
+                document.getElementById('sidebar-toc').style.display = 'block';
+                hasUnsavedChanges = false;
+                renderPage();
+                btn.innerText = "☁️ 從雲端載入";
+                alert("☁️ 成功從 GitHub 載入最新題庫！");
+            } catch (error) {
+                document.querySelector('.btn-cloud-load').innerText = "☁️ 從雲端載入";
+                alert(`❌ 載入失敗！\n請檢查:\n1. 你的 Repo 是否為 Public\n2. 檔案 ${GITHUB_FILE_PATH} 是否存在\n3. 帳號及 Repo 名稱是否設定正確`);
             }
-            return true;
         }
+
+        // 🚀 同步更新回 GitHub
+        async function saveToGitHub() {
+            if (globalData.length === 0) return alert("題庫為空，無法同步！");
+            
+            // 詢問 Token (支援從 localStorage 記憶)
+            let savedToken = localStorage.getItem("GITHUB_PAT") || "";
+            let token = prompt("請輸入你的 GitHub Personal Access Token (PAT)：\n需要包含 'repo' 權限", savedToken);
+            
+            if (!token) return;
+            localStorage.setItem("GITHUB_PAT", token); // 記住 Token 方便下次使用
+
+            const btn = document.querySelector('.btn-cloud-sync');
+            btn.innerText = "⏳ 同步中...";
+
+            try {
+                const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_FILE_PATH}`;
+                
+                // 1. 取得現有檔案的 SHA
+                let sha = "";
+                const getRes = await fetch(apiUrl, { headers: { "Authorization": `token ${token}` } });
+                if (getRes.ok) {
+                    const fileData = await getRes.json();
+                    sha = fileData.sha;
+                }
+
+                // 2. 將資料轉 Base64 (解決中文亂碼)
+                const jsonString = JSON.stringify(globalData, null, 2);
+                const encodedContent = btoa(unescape(encodeURIComponent(jsonString)));
+
+                // 3. 發送 PUT 請求更新
+                const updateRes = await fetch(apiUrl, {
+                    method: "PUT",
+                    headers: { "Authorization": `token ${token}`, "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        message: "透過題庫系統網頁自動更新",
+                        content: encodedContent,
+                        sha: sha || undefined
+                    })
+                });
+
+                if (updateRes.ok) {
+                    hasUnsavedChanges = false;
+                    alert("✅ 成功同步！題庫已更新至 GitHub。");
+                } else {
+                    const errData = await updateRes.json();
+                    throw new Error(errData.message);
+                }
+            } catch (error) {
+                console.error(error);
+                alert("❌ 同步失敗！請檢查 Token 是否正確，或者是否有 repo 權限。\n錯誤訊息: " + error.message);
+            } finally {
+                btn.innerText = "🚀 一鍵同步至雲端";
+            }
+        }
+
+        // ================= 本機操作功能 =================
 
         function handleFileLoad(event) {
             const file = event.target.files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
-                    const importedData = JSON.parse(e.target.result);
-                    
-                    // 執行 JSON 結構驗證
-                    if (!validateJSONStructure(importedData)) {
-                        alert("❌ 錯誤：JSON 檔案結構不符合題庫標準格式！
-必須包含規格：陣列型態，且內含 categoryTitle 及 questions 陣列項目。");
-                        return;
-                    }
-
-                    globalData = importedData;
+                    globalData = JSON.parse(e.target.result);
                     document.getElementById('search-panel').style.display = 'flex';
                     document.getElementById('sidebar-toc').style.display = 'block';
                     hasUnsavedChanges = false;
-                    saveToCache();
                     renderPage();
-                    alert("✅ 題庫安全匯入成功，並已通過格式驗證！");
-                } catch (err) {
-                    alert("錯誤：解設檔案失敗！請確保上傳的是正確的 JSON 格式檔案。");
-                }
+                } catch (err) { alert("檔案格式錯誤！"); }
             };
             reader.readAsText(file);
             event.target.value = '';
         }
 
-        // ➕ 新增主分類
-        function addNewCategory() {
-            const title = prompt("請輸入全新主分類標題 (例如: 幾何學、三角學)：");
-            if (title === null) return; 
-            const trimmed = title.trim();
-            if (trimmed === "") {
-                alert("主分類名稱不能為空！");
-                return;
-            }
-            
-            globalData.push({
-                categoryTitle: trimmed,
-                questions: []
-            });
-            hasUnsavedChanges = true;
-            saveToCache();
-            renderPage();
-            
-            // 自動滾動到最下方新分類
-            setTimeout(() => {
-                const lastCatIdx = globalData.length - 1;
-                document.getElementById(`cat-${lastCatIdx}`).scrollIntoView({ behavior: 'smooth' });
-            }, 100);
+        function exportJSON() {
+            if (globalData.length === 0) return alert("沒有資料可匯出！");
+            const jsonString = JSON.stringify(globalData, null, 2);
+            const blob = new Blob([jsonString], { type: "application/json;charset=utf-8" });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url; a.download = GITHUB_FILE_PATH;
+            a.click(); URL.revokeObjectURL(url);
         }
 
-        // ➕ 新增題目
+        function addNewCategory() {
+            const title = prompt("請輸入全新主分類標題：");
+            if (!title || title.trim() === "") return;
+            globalData.push({ categoryTitle: title.trim(), questions: [] });
+            hasUnsavedChanges = true;
+            renderPage();
+            setTimeout(() => document.getElementById(`cat-${globalData.length-1}`).scrollIntoView(), 100);
+        }
+
         function addNewQuestion(catIdx) {
             const category = globalData[catIdx];
-            // 動態找出當前最大題號並自動 +1
             let maxNum = 0;
-            category.questions.forEach(q => {
-                const n = parseInt(q.num);
-                if (!isNaN(n) && n > maxNum) maxNum = n;
-            });
-            const nextNum = maxNum + 1;
-
-            const newQ = {
-                num: nextNum,
-                tag: "未分類",
-                content: "請在此輸入題目源碼。支援 HTML 標籤與 MathJax 公式，例如：已知 \\( f(x) = x^2 + 2x \\)，求 \\( f(3) \\) 的值。"
-            };
-
-            category.questions.push(newQ);
+            category.questions.forEach(q => { const n = parseInt(q.num); if(!isNaN(n) && n>maxNum) maxNum=n; });
+            category.questions.push({ num: maxNum + 1, tag: "未分類", content: "在此輸入題目。支援 HTML 與 MathJax \\( x^2 \\)。" });
             hasUnsavedChanges = true;
-            saveToCache();
             renderPage();
-
-            // 建立後直接幫使用者開啟該題目的編輯模式
-            const newQIdx = category.questions.length - 1;
-            enterEditMode(catIdx, newQIdx);
-            
-            // 滾動至該卡片
-            document.getElementById(`card-${catIdx}-${newQIdx}`).scrollIntoView({ behavior: 'smooth' });
+            enterEditMode(catIdx, category.questions.length - 1);
         }
 
-        // 🗑️ 刪除題目
         function deleteQuestion(catIdx, qIdx) {
-            if (confirm(`⚠️ 確定要刪除第 ${globalData[catIdx].questions[qIdx].num} 題嗎？此動作無法復原。`)) {
-                globalData[catIdx].questions.splice(qIdx, 1);
-                hasUnsavedChanges = true;
-                saveToCache();
-                renderPage();
-            }
+            if (confirm("確定刪除此題嗎？")) { globalData[catIdx].questions.splice(qIdx, 1); hasUnsavedChanges = true; renderPage(); }
         }
 
-        // 🔄 綜合渲染畫面與雙層巢狀目錄
+        // ================= 介面渲染與編輯功能 =================
+
         function renderPage() {
             const container = document.getElementById('quiz-container');
             const tocList = document.getElementById('toc-list');
             const searchTerm = document.getElementById('search-input') ? document.getElementById('search-input').value.toLowerCase() : '';
             
-            container.innerHTML = '';
-            tocList.innerHTML = '';
-
-            if (globalData.length === 0) {
-                container.innerHTML = '<div class="placeholder-text">💡 目前題庫為空，請點擊上方按鈕建立或匯入。</div>';
-                return;
-            }
-
-            let hasVisibleCards = false;
+            container.innerHTML = ''; tocList.innerHTML = '';
+            if (globalData.length === 0) { container.innerHTML = '<div class="placeholder-text">💡 目前沒有資料。</div>'; return; }
 
             globalData.forEach((category, catIdx) => {
-                // 篩選題目
-                const filteredQuestions = category.questions.filter(q => {
-                    const contentMatch = q.content.toLowerCase().includes(searchTerm);
-                    const tagMatch = q.tag.toLowerCase().includes(searchTerm);
-                    return contentMatch || tagMatch;
-                });
-
-                // 目錄項目無論有無題目皆可存在，但若有篩選則依篩選條件
+                const filteredQuestions = category.questions.filter(q => q.content.toLowerCase().includes(searchTerm) || q.tag.toLowerCase().includes(searchTerm));
+                
                 if (filteredQuestions.length > 0 || searchTerm === '') {
-                    hasVisibleCards = true;
                     const catId = `cat-${catIdx}`;
-
-                    // 1. 建立左側主分類目錄
                     const tocItem = document.createElement('li');
-                    tocItem.innerHTML = `<a href="#${catId}">📂 ${category.categoryTitle} (${filteredQuestions.length})</a>`;
-                    
-                    const tocSubList = document.createElement('ul');
-                    tocSubList.className = 'toc-sub-list';
+                    tocItem.innerHTML = `<a href="#${catId}">📂 ${category.categoryTitle}</a>`;
+                    const tocSubList = document.createElement('ul'); tocSubList.className = 'toc-sub-list';
 
-                    // 2. 建立右側主分類區段頭部
-                    const catHeaderDiv = document.createElement('div');
-                    catHeaderDiv.className = 'category-header-container';
-                    catHeaderDiv.id = catId;
+                    container.innerHTML += `<div class="category-header-container" id="${catId}">
+                        <h2 class="category-title">${category.categoryTitle}</h2>
+                        <button class="btn btn-add-q" onclick="addNewQuestion(${catIdx})">➕ 新增題目</button>
+                    </div>`;
 
-                    const catHeaderTitle = document.createElement('h2');
-                    catHeaderTitle.className = 'category-title';
-                    catHeaderTitle.innerText = category.categoryTitle;
-                    
-                    const addQBtn = document.createElement('button');
-                    addQBtn.className = 'btn btn-add-q';
-                    addQBtn.innerHTML = '➕ 新增題目';
-                    addQBtn.onclick = () => addNewQuestion(catIdx);
+                    const qByTag = {};
+                    filteredQuestions.forEach(q => { const t = q.tag || '未分類'; if(!qByTag[t]) qByTag[t]=[]; qByTag[t].push(q); });
 
-                    catHeaderDiv.appendChild(catHeaderTitle);
-                    catHeaderDiv.appendChild(addQBtn);
-                    container.appendChild(catHeaderDiv);
-
-                    // 3. 按 Tag 進行題目分組
-                    const questionsByTag = {};
-                    filteredQuestions.forEach(q => {
-                        const tag = q.tag || '未分類';
-                        if (!questionsByTag[tag]) questionsByTag[tag] = [];
-                        questionsByTag[tag].push(q);
-                    });
-
-                    // 4. 依序渲染各子分類標籤群組
-                    Object.keys(questionsByTag).forEach((tag, tagIdx) => {
-                        const tagGroup = questionsByTag[tag];
+                    Object.keys(qByTag).forEach((tag, tagIdx) => {
                         const tagId = `cat-${catIdx}-tag-${tagIdx}`;
-
-                        // 新增子目錄連結
-                        const subTocItem = document.createElement('li');
-                        subTocItem.innerHTML = `<a href="#${tagId}">🏷️ ${tag} (${tagGroup.length})</a>`;
-                        tocSubList.appendChild(subTocItem);
-
-                        // 新增右側內容子分類標題
-                        const subHeader = document.createElement('h3');
-                        subHeader.className = 'sub-category-title';
-                        subHeader.id = tagId;
-                        subHeader.innerText = `🏷️ ${tag}`;
-                        container.appendChild(subHeader);
-
-                        // 渲染群組內所有題目卡片
-                        tagGroup.forEach(q => {
-                            const originalQIdx = category.questions.findIndex(orig => orig.num === q.num);
-                            
-                            const card = document.createElement('div');
-                            card.className = 'quiz-card';
-                            card.id = `card-${catIdx}-${originalQIdx}`;
-                            card.innerHTML = `
-                                <div class="card-header">
-                                    <div class="card-title"><span>第 ${q.num} 題</span> <span class="card-tag">${q.tag}</span></div>
-                                    <div class="card-actions">
-                                        <button class="btn btn-edit" onclick="enterEditMode(${catIdx}, ${originalQIdx})">✏️ 編輯</button>
+                        tocSubList.innerHTML += `<li><a href="#${tagId}">🏷️ ${tag} (${qByTag[tag].length})</a></li>`;
+                        container.innerHTML += `<h3 class="sub-category-title" id="${tagId}">🏷️ ${tag}</h3>`;
+                        
+                        qByTag[tag].forEach(q => {
+                            const origIdx = category.questions.findIndex(orig => orig.num === q.num);
+                            container.innerHTML += `
+                                <div class="quiz-card" id="card-${catIdx}-${origIdx}">
+                                    <div class="card-header">
+                                        <div class="card-title">第 ${q.num} 題 <span class="card-tag">${q.tag}</span></div>
+                                        <button class="btn btn-edit" onclick="enterEditMode(${catIdx}, ${origIdx})">✏️ 編輯</button>
                                     </div>
-                                </div>
-                                <div class="card-body">${q.content}</div>
-                            `;
-                            container.appendChild(card);
+                                    <div class="card-body">${q.content}</div>
+                                </div>`;
                         });
                     });
-
-                    tocItem.appendChild(tocSubList);
-                    tocList.appendChild(tocItem);
+                    tocItem.appendChild(tocSubList); tocList.appendChild(tocItem);
                 }
             });
-
-            if (!hasVisibleCards && searchTerm !== '') {
-                container.innerHTML = '<div class="placeholder-text">🔍 找不到符合搜尋條件的題目。</div>';
-            }
-            
             triggerMathJax();
         }
 
         function filterQuestions() { renderPage(); }
 
-        // ✏️ 進入編輯模式
         function enterEditMode(catIdx, qIdx) {
             const card = document.getElementById(`card-${catIdx}-${qIdx}`);
             const q = globalData[catIdx].questions[qIdx];
             card.classList.add('editing');
-
             card.innerHTML = `
                 <div class="card-header">
-                    <div class="card-title" style="color: var(--warning-color)">⚠️ 正在編輯第 ${q.num} 題</div>
-                    <div class="card-actions">
+                    <div class="card-title" style="color:var(--warning-color)">⚠️ 編輯中</div>
+                    <div>
                         <button class="btn btn-save" onclick="saveQuestion(${catIdx}, ${qIdx})">💾 儲存</button>
-                        <button class="btn btn-danger" onclick="deleteQuestion(${catIdx}, ${qIdx})">🗑️ 刪除題目</button>
+                        <button class="btn btn-danger" onclick="deleteQuestion(${catIdx}, ${qIdx})">🗑️ 刪除</button>
                         <button class="btn btn-cancel" onclick="renderPage()">❌ 取消</button>
                     </div>
                 </div>
                 <div class="edit-layout">
                     <div class="edit-column edit-form">
-                        <label>題號 (Num)：</label>
-                        <input type="text" id="input-num-${catIdx}-${qIdx}" value="${q.num}">
-
-                        <label>題目分類標籤 (Tag)：</label>
-                        <input type="text" id="input-tag-${catIdx}-${qIdx}" value="${q.tag}">
-                        
-                        <!-- 圖片上傳工具區 -->
+                        <label>題號:</label><input type="text" id="input-num-${catIdx}-${qIdx}" value="${q.num}">
+                        <label>標籤:</label><input type="text" id="input-tag-${catIdx}-${qIdx}" value="${q.tag}">
                         <div class="image-tools">
-                            <label><strong>🖼️ 幾何圖形/外部圖片支援：</strong></label>
-                            <p style="margin: 2px 0 8px 0; font-size:12px; color:#666;">選取本地圖片後，系統將自動轉為 Base64 碼並插入源碼末端：</p>
-                            <input type="file" accept="image/*" onchange="handleImageUploadToBase64(event, ${catIdx}, ${qIdx})">
+                            <label>🖼️ 插入圖片轉 Base64:</label>
+                            <input type="file" accept="image/*" onchange="handleImageUpload(event, ${catIdx}, ${qIdx})">
                         </div>
-                        
-                        <label>題目與答案內容原始碼 (支援 HTML 與 MathJax)：</label>
+                        <label>內容源碼:</label>
                         <textarea id="input-content-${catIdx}-${qIdx}" oninput="updateLivePreview(${catIdx}, ${qIdx})"></textarea>
                     </div>
                     <div class="edit-column">
-                        <label style="font-size: 13px; font-weight: bold; margin-bottom: 5px; color: #555;">👀 即時渲染預覽：</label>
+                        <label>👀 即時預覽:</label>
                         <div id="preview-box-${catIdx}-${qIdx}" class="preview-box">${q.content}</div>
                     </div>
-                </div>
-            `;
+                </div>`;
             document.getElementById(`input-content-${catIdx}-${qIdx}`).value = q.content;
             triggerMathJax(document.getElementById(`preview-box-${catIdx}-${qIdx}`));
         }
 
-        // 🖼️ 處理圖片轉 Base64 並自動插入編輯器
-        function handleImageUploadToBase64(event, catIdx, qIdx) {
-            const file = event.target.files[0];
-            if (!file) return;
-
+        function handleImageUpload(event, catIdx, qIdx) {
+            const file = event.target.files[0]; if (!file) return;
             const reader = new FileReader();
             reader.onload = function(e) {
-                const base64Data = e.target.result;
                 const textarea = document.getElementById(`input-content-${catIdx}-${qIdx}`);
-                
-                // 建立 HTML 圖片標籤
-                const imgHtmlTag = `\n<!-- 插入幾何圖形項目 -->\n<img src="${base64Data}" alt="幾何圖形" />\n`;
-                
-                // 插入至當前游標處或文字最尾端
-                const startPos = textarea.selectionStart;
-                const endPos = textarea.selectionEnd;
-                const currentContent = textarea.value;
-                
-                textarea.value = currentContent.substring(0, startPos) + imgHtmlTag + currentContent.substring(endPos);
-                
-                // 更新即時預覽
+                const imgTag = `\\n<img src="${e.target.result}" alt="圖片" />\\n`;
+                const s = textarea.selectionStart, end = textarea.selectionEnd;
+                textarea.value = textarea.value.substring(0, s) + imgTag + textarea.value.substring(end);
                 updateLivePreview(catIdx, qIdx);
             };
             reader.readAsDataURL(file);
@@ -644,64 +366,20 @@
 
         function updateLivePreview(catIdx, qIdx) {
             clearTimeout(mathJaxTimeout);
-            const content = document.getElementById(`input-content-${catIdx}-${qIdx}`).value;
-            const previewBox = document.getElementById(`preview-box-${catIdx}-${qIdx}`);
-            previewBox.innerHTML = content;
-
-            mathJaxTimeout = setTimeout(() => { triggerMathJax(previewBox); }, 500);
+            const box = document.getElementById(`preview-box-${catIdx}-${qIdx}`);
+            box.innerHTML = document.getElementById(`input-content-${catIdx}-${qIdx}`).value;
+            mathJaxTimeout = setTimeout(() => triggerMathJax(box), 500);
         }
 
-        // 💾 儲存修改
         function saveQuestion(catIdx, qIdx) {
-            const editedNum = document.getElementById(`input-num-${catIdx}-${qIdx}`).value.trim();
-            const editedTag = document.getElementById(`input-tag-${catIdx}-${qIdx}`).value.trim();
-            const editedContent = document.getElementById(`input-content-${catIdx}-${qIdx}`).value;
-            
-            if (editedNum === "") {
-                alert("題號不能為空！");
-                return;
-            }
-
-            globalData[catIdx].questions[qIdx].num = editedNum;
-            globalData[catIdx].questions[qIdx].tag = editedTag || "未分類";
-            globalData[catIdx].questions[qIdx].content = editedContent;
-            
-            hasUnsavedChanges = true;
-            saveToCache(); // 更新本地快取
-            renderPage();
+            globalData[catIdx].questions[qIdx].num = document.getElementById(`input-num-${catIdx}-${qIdx}`).value.trim();
+            globalData[catIdx].questions[qIdx].tag = document.getElementById(`input-tag-${catIdx}-${qIdx}`).value.trim() || "未分類";
+            globalData[catIdx].questions[qIdx].content = document.getElementById(`input-content-${catIdx}-${qIdx}`).value;
+            hasUnsavedChanges = true; renderPage();
         }
 
-        // 💾 匯出更新檔 JSON
-        function exportJSON() {
-            if (globalData.length === 0) {
-                alert("目前沒有題庫資料可以匯出！");
-                return;
-            }
-            
-            const jsonString = JSON.stringify(globalData, null, 2);
-            const blob = new Blob([jsonString], { type: "application/json;charset=utf-8" });
-            const url = URL.createObjectURL(blob);
-            
-            const downloadLink = document.createElement('a');
-            downloadLink.href = url;
-            downloadLink.download = "DSE_Math_Bank_System_v2.json";
-            document.body.appendChild(downloadLink);
-            downloadLink.click();
-            document.body.removeChild(downloadLink);
-            URL.revokeObjectURL(url);
-
-            hasUnsavedChanges = false;
-            localStorage.removeItem(CACHE_KEY); // 匯出成功後清除暫存快取
-            alert("✅ 題庫檔案匯出成功！本地快取已安全釋放。");
-        }
-
-        function triggerMathJax(element = null) {
-            if (window.MathJax && MathJax.typesetPromise) {
-                const target = element ? [element] : null;
-                MathJax.typesetPromise(target).catch(function (err) {
-                    console.error("MathJax 渲染出錯: " + err.message);
-                });
-            }
+        function triggerMathJax(el = null) {
+            if (window.MathJax && MathJax.typesetPromise) MathJax.typesetPromise(el ? [el] : null);
         }
     </script>
 </body>
